@@ -43,8 +43,8 @@ Pets Gallery is a mobile application that connects pet owners with pet lovers. I
 
 To run this app on your local machine, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/pets-gallery-app.git`
-2. Navigate to the project folder: `cd pets-gallery-app`
+1. Clone the repository: `https://github.com/prasadrawas/pets_gallery.git`
+2. Navigate to the project folder: `cd pets_gallery`
 3. Install dependencies: `flutter pub get`
 4. Run the app: `flutter run`
 
