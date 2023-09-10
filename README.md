@@ -6,12 +6,12 @@ The Pets Gallery App is a mobile application that connects pet owners with pet l
 
 ## Features
 
-- **Pet Listings:** Browse through a wide variety of pet listings.
-- **Adoption and Purchase:** Choose to adopt or buy your favorite pet.
-- **Contact Pet Owners:** Connect with pet owners to inquire about pets.
-- **User Profiles:** Create user profiles to manage your pet listings.
-- **Location Services:** Automatically detect your location for accurate pet listings.
-- **Community Engagement:** Join our pet-loving community, share pet stories, and find your new family member.
+- **Firebase Authentication:** Securely sign in and manage your user profile.
+- **Firebase Cloud Storage:** Easily upload and store images of your pets.
+- **Add/Update Pet:** Create new pet listings or update existing ones.
+- **Add to Favorites:** Save your favorite pets for quick access.
+- **Nearby Pets:** Discover pets available in your area based on your location.
+
 
 ## Screenshots (Mobile)
 
