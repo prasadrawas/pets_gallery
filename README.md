@@ -15,10 +15,12 @@ The Pets Gallery App is a mobile application that connects pet owners with pet l
 
 ## Screenshots (Mobile)
 
+![New Project](https://github.com/prasadrawas/pets_gallery/assets/78028165/b1291f65-a71b-4528-9582-7ec0c8f55753)
 
 
 ## Screenshots (Tablet)
 
+![New Project(1)](https://github.com/prasadrawas/pets_gallery/assets/78028165/7c8c1728-4ce1-480e-8414-fc961db39163)
 
 
 ## Download
