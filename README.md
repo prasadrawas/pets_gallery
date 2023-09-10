@@ -1,5 +1,6 @@
 # Pets Gallery App
 
+
 ## Download
 
 You can download the Pets Gallery App from the following link:
@@ -7,9 +8,12 @@ You can download the Pets Gallery App from the following link:
 [Download Pets Gallery App](https://example.com/download-link)
 
 
+
 ## Overview
 
 Pets Gallery is a mobile application that connects pet owners with pet lovers. It offers features such as user authentication, cloud storage for pet images, the ability to add/update pet listings, and the option to save favorite pets. You can also discover pets available in your area based on your location.
+
+
 
 
 ## Features
@@ -21,6 +25,8 @@ Pets Gallery is a mobile application that connects pet owners with pet lovers. I
 - **Nearby Pets:** Discover pets available in your area based on your location.
 
 
+
+
 ## Screenshots (Mobile)
 
 ![New Project](https://github.com/prasadrawas/pets_gallery/assets/78028165/b1291f65-a71b-4528-9582-7ec0c8f55753)
@@ -28,7 +34,9 @@ Pets Gallery is a mobile application that connects pet owners with pet lovers. I
 
 ## Screenshots (Tablet)
 
-![New Project(1)](https://github.com/prasadrawas/pets_gallery/assets/78028165/7c8c1728-4ce1-480e-8414-fc961db39163)
+![New Project(2)](https://github.com/prasadrawas/pets_gallery/assets/78028165/d47b80fb-a50c-4d01-8b43-fa472bfb724c)
+
+
 
 
 ## Installation
