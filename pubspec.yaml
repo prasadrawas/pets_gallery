@@ -1,0 +1,69 @@
+name: pets_app
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  get: ^4.6.5
+
+  # Location
+  geolocator: ^10.0.1
+  location: ^5.0.3
+  geocoder_buddy:
+    path: ./packages/geocoder_buddy
+
+  # Networks
+  connectivity_plus: ^4.0.2
+
+  # url launcher
+  url_launcher: ^6.1.14
+
+  # Image
+  image_picker: ^1.0.4
+  cached_network_image: ^3.2.3
+
+  # Local Storage
+  shared_preferences: ^2.2.1
+
+  # toast
+  fluttertoast: ^8.2.2
+
+  # logger
+  logger: ^2.0.2
+
+  # Firebase dependencies
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.9.0
+  firebase_storage: ^11.2.6
+  cloud_firestore: ^4.9.1
+
+  # fonts
+  google_fonts: ^4.0.4
+
+  # onboarding
+  flutter_onboarding_slider: ^1.0.10
+  onboarding_intro_screen: ^0.0.8
+
+  # Icons
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
