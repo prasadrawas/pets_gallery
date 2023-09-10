@@ -5,7 +5,7 @@
 
 You can download the Pets Gallery App from the following link:
 
-[Download Pets Gallery App](https://example.com/download-link)
+[Download Pets Gallery App](https://drive.google.com/file/d/1kPiizXzDaeMrA-h-2N2pw5cjh6mCvTG-/view?usp=sharing)
 
 
 
@@ -50,10 +50,3 @@ To run this app on your local machine, follow these steps:
 
 Make sure you have Flutter installed on your system before running the app.
 
-## Contributions
-
-Contributions to this project are welcome. Feel free to submit bug reports, feature requests, or even pull requests to help improve the app.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
