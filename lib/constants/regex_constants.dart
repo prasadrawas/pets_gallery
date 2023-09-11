@@ -6,8 +6,7 @@ class RegexConstants {
 
   static const String fullNameRegex = r'^[A-Za-z\s]+$';
 
-  static const String strongPasswordRegex =
-      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$';
+  static const String sixCharacterPasswordRegex = r'^.{6,}$';
 
   static const String normalPasswordRegex = r'^.{8,}$';
 

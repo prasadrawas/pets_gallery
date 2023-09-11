@@ -60,6 +60,7 @@ class MyFavouritesScreen extends StatelessWidget {
                     crossAxisCount: crossAxisCount,
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
+                    childAspectRatio: 0.8,
                   ),
                   padding: const EdgeInsets.all(6),
                   itemCount: snapshot.data!.docs.length,

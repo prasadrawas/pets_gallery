@@ -28,97 +28,100 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: CustomAppBar(
             title: StringConstants.home,
             subTitle:
-                '${_.user?.address?.state ?? ''}, ${_.user?.address?.streetNumber ?? ''}',
+                '${_.user?.address?.state ?? ''}, ${_.user?.address?.city ?? ''} ${_.user?.address?.streetNumber ?? ''}',
           ),
-          body: Column(
-            children: [
-              _buildCategories(_),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(StringConstants.results,
-                      style: AppTextStyles.medium(fontSize: 18)),
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                _buildCategories(_),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(StringConstants.results,
+                        style: AppTextStyles.medium(fontSize: 18)),
+                  ),
                 ),
-              ),
-              _buildResults(_),
-            ],
+                _buildResults(_),
+              ],
+            ),
           ),
         );
       },
     );
   }
 
-  Expanded _buildResults(HomeController _) {
-    return Expanded(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final screenWidth = constraints.maxWidth;
-          int crossAxisCount;
+  Widget _buildResults(HomeController _) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        int crossAxisCount;
 
-          if (screenWidth < 600) {
-            crossAxisCount = 2; // Mobile screen
-          } else if (screenWidth < 1200) {
-            crossAxisCount = 3; // Medium screen
-          } else {
-            crossAxisCount = 4; // Large screen
-          }
+        if (screenWidth < 600) {
+          crossAxisCount = 2; // Mobile screen
+        } else if (screenWidth < 1200) {
+          crossAxisCount = 3; // Medium screen
+        } else {
+          crossAxisCount = 4; // Large screen
+        }
 
-          return StreamBuilder<QuerySnapshot>(
-            stream: _.petsQuery?.snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(strokeWidth: 1),
-                );
-              }
-
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    '${StringConstants.error}: ${snapshot.error}',
-                    style: AppTextStyles.light(),
-                  ),
-                );
-              }
-
-              if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-                return Center(
-                  child: Text(
-                    StringConstants.noPetsFound,
-                    style: AppTextStyles.light(),
-                  ),
-                );
-              }
-
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                ),
-                padding: const EdgeInsets.all(6),
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  final data = snapshot.data!.docs[index];
-                  var petData =
-                      Pet.fromJson(data.data() as Map<String, dynamic>);
-                  petData = petData.copyWith(id: data.id);
-                  return PetCard(
-                    name: petData.name,
-                    description: petData.description,
-                    imageUrl: petData.image,
-                    color: petData.color,
-                    age: petData.age,
-                    onPressed: () => _onCardPressed(petData),
-                  );
-                },
+        return StreamBuilder<QuerySnapshot>(
+          stream: _.petsQuery?.snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(strokeWidth: 1),
               );
-            },
-          );
-        },
-      ),
+            }
+
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  '${StringConstants.error}: ${snapshot.error}',
+                  style: AppTextStyles.light(),
+                ),
+              );
+            }
+
+            if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+              return Center(
+                child: Text(
+                  StringConstants.noPetsFound,
+                  style: AppTextStyles.light(),
+                ),
+              );
+            }
+
+            return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 14,
+                mainAxisSpacing: 14,
+                childAspectRatio: 0.8,
+              ),
+              padding: const EdgeInsets.all(6),
+              itemCount: snapshot.data!.docs.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final data = snapshot.data!.docs[index];
+                var petData = Pet.fromJson(data.data() as Map<String, dynamic>);
+                petData = petData.copyWith(id: data.id);
+                return PetCard(
+                  name: petData.name,
+                  description: petData.description,
+                  imageUrl: petData.image,
+                  color: petData.color,
+                  age: petData.age,
+                  onPressed: () => _onCardPressed(petData),
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 

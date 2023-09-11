@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pets_app/constants/asset_constants.dart';
 import 'package:pets_app/constants/string_constants.dart';
+import 'package:pets_app/presentation/screens/pets/add_pet/add_pet_screen.dart';
 import 'package:pets_app/presentation/screens/pets/favourites_pets/favourites_screen.dart';
 import 'package:pets_app/presentation/screens/pets/my_pets/my_pets_screen.dart';
 import 'package:pets_app/presentation/screens/profile/profile_controller.dart';
@@ -54,7 +55,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: StringConstants.myPets,
                       onTap: _onMyPetsTap,
                     ),
-                    // My Adopts section
+                    // Add pet section
+                    CustomListTile(
+                      leadingIcon: Icons.add_circle_outlined,
+                      text: StringConstants.addPet,
+                      onTap: _onAddPetTap,
+                    ),
+                    // My Favourites section
                     CustomListTile(
                       leadingIcon: Icons.favorite,
                       text: StringConstants.myFavourites,
@@ -74,6 +81,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           );
         });
+  }
+
+  void _onAddPetTap() {
+    Get.to(
+      () => const AddPetScreen(),
+      transition: Transition.rightToLeft,
+      duration: const Duration(milliseconds: 350),
+    );
   }
 
   void _onMyPetsTap() {

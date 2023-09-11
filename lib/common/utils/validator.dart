@@ -10,10 +10,10 @@ class Validator {
   static const String invalidFullNameFormat = 'Invalid full name format';
   static const String strongPasswordRequired = 'Password is required';
   static const String invalidStrongPasswordFormat =
-      'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character';
+      'Password must be at least 6 characters long';
   static const String normalPasswordRequired = 'Password is required';
   static const String invalidNormalPasswordFormat =
-      'Password must be at least 8 characters long';
+      'Password must be at least 6 characters long';
 
   static const String fieldRequired = 'This field is required';
   static const String invalidFormat = 'Invalid format';
@@ -60,7 +60,7 @@ class Validator {
       return strongPasswordRequired;
     }
     final RegExp strongPasswordRegex =
-        RegExp(RegexConstants.strongPasswordRegex);
+        RegExp(RegexConstants.sixCharacterPasswordRegex);
     if (!strongPasswordRegex.hasMatch(value)) {
       return invalidStrongPasswordFormat;
     }

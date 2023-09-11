@@ -26,7 +26,7 @@ class _NearbyScreenState extends State<NearbyScreen> {
           appBar: CustomAppBar(
             title: StringConstants.nearbyPets,
             subTitle:
-                '${_.user?.address?.state ?? ''}, ${_.user?.address?.streetNumber ?? ''}',
+                '${_.user?.address?.state ?? ''}, ${_.user?.address?.city ?? ''} ${_.user?.address?.streetNumber ?? ''}',
           ),
           body: Column(
             children: [
@@ -79,6 +79,7 @@ class _NearbyScreenState extends State<NearbyScreen> {
                             crossAxisCount: crossAxisCount,
                             crossAxisSpacing: 14,
                             mainAxisSpacing: 14,
+                            childAspectRatio: 0.8,
                           ),
                           padding: const EdgeInsets.all(6),
                           itemCount: snapshot.data!.docs.length,

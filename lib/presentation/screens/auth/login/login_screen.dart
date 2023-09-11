@@ -28,13 +28,16 @@ class _LoginScreenState extends State<LoginScreen> {
     return GetBuilder<LoginController>(
       init: LoginController(),
       builder: (_) {
-        return Scaffold(
-          body: SafeArea(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final isSmallScreen = constraints.maxWidth < 600;
-                return _buildFormWidget(_, isSmallScreen);
-              },
+        return WillPopScope(
+          onWillPop: () async => _.onBackPressed(),
+          child: Scaffold(
+            body: SafeArea(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final isSmallScreen = constraints.maxWidth < 600;
+                  return _buildFormWidget(_, isSmallScreen);
+                },
+              ),
             ),
           ),
         );

@@ -16,7 +16,6 @@ dependencies:
   get: ^4.6.5
 
   # Location
-  geolocator: ^10.0.1
   location: ^5.0.3
   geocoder_buddy:
     path: ./packages/geocoder_buddy
@@ -50,7 +49,6 @@ dependencies:
   google_fonts: ^4.0.4
 
   # onboarding
-  flutter_onboarding_slider: ^1.0.10
   onboarding_intro_screen: ^0.0.8
 
   # Icons

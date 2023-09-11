@@ -28,13 +28,16 @@ class _SignupScreenState extends State<SignupScreen> {
     return GetBuilder<SignupController>(
       init: SignupController(),
       builder: (_) {
-        return Scaffold(
-          body: SafeArea(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final isSmallScreen = constraints.maxWidth < 600;
-                return _buildFormWidget(_, isSmallScreen);
-              },
+        return WillPopScope(
+          onWillPop: () async => _.onBackPressed(),
+          child: Scaffold(
+            body: SafeArea(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final isSmallScreen = constraints.maxWidth < 600;
+                  return _buildFormWidget(_, isSmallScreen);
+                },
+              ),
             ),
           ),
         );

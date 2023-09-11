@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pets_app/common/navigation/navigation.dart';
 import 'package:pets_app/common/utils/utils.dart';
@@ -66,6 +67,27 @@ class LoginController extends GetxController {
     } else {
       Utils.showErrorSnackBar('Password Reset Error', response.error!);
     }
+  }
+
+  bool doubleBackToExitPressedOnce = false;
+
+  bool onBackPressed() {
+    if (doubleBackToExitPressedOnce) {
+      // This is the second back press within 2 seconds
+      return true; // Exit the app
+    }
+
+    // Show a toast message
+    Fluttertoast.showToast(msg: 'Press back to exit');
+
+    doubleBackToExitPressedOnce = true;
+
+    // Reset the flag after 2 seconds
+    Future.delayed(const Duration(seconds: 2), () {
+      doubleBackToExitPressedOnce = false;
+    });
+
+    return false;
   }
 
   @override

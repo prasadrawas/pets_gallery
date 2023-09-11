@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pets_app/common/utils/utils.dart';
-import 'package:pets_app/constants/app_constants.dart';
 import 'package:pets_app/data/local/preference.dart';
 import 'package:pets_app/data/network/firebase/firestore_repository.dart';
 import 'package:pets_app/data/network/firebase/storage_repository.dart';
@@ -34,13 +33,13 @@ class AddPetController extends GetxController {
       colorController.text = pet.color;
       ageController.text = pet.age;
     } else {
-      selectedCategory = AppConstants.petCategories.first;
-      categoryController.text = selectedCategory ?? 'Dog';
-      nameController.text = 'Max';
-      descriptionController.text =
-          'Max is a friendly and energetic dog who loves to play fetch and go on long walks.';
-      colorController.text = 'Brown and White';
-      ageController.text = '3 years';
+      // selectedCategory = AppConstants.petCategories.first;
+      // categoryController.text = selectedCategory ?? 'Dog';
+      // nameController.text = 'Max';f
+      // descriptionController.text =
+      //     'Max is a friendly and energetic dog who loves to play fetch and go on long walks.';
+      // colorController.text = 'Brown and White';
+      // ageController.text = '3 years';
     }
     ownerNameController.text = user?.fullName ?? '';
     ownerContactNumberController.text = user?.phone ?? '';
@@ -109,7 +108,9 @@ class AddPetController extends GetxController {
 
         return;
       }
-      storageRepository.deleteImage(imageUrl);
+      if (imageUrl.isNotEmpty) {
+        storageRepository.deleteImage(imageUrl);
+      }
       imageUrl = storageResult.data!;
     } else if (pet?.image == null) {
       Get.back();

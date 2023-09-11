@@ -13,8 +13,7 @@ class HomeController extends GetxController {
   final firestoreRepository = FirestoreRepository();
   String selectedCategory = 'All';
   var user = Preference.getUser();
-  Query? petsQuery =
-      FirebaseFirestore.instance.collection(FirebaseConstants.petsCollection);
+  var petsQuery;
 
   @override
   void onInit() {
@@ -22,12 +21,15 @@ class HomeController extends GetxController {
     // Fetch the user's address when the screen is loaded
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       getAddress();
+      updateQuery('All');
     });
   }
 
   // Update the query based on the selected category
   void updateQuery(String category) {
     selectedCategory = category;
+    petsQuery =
+        FirebaseFirestore.instance.collection(FirebaseConstants.petsCollection);
     if (selectedCategory != 'All') {
       petsQuery = petsQuery?.where('category', isEqualTo: selectedCategory);
     }
