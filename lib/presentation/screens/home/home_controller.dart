@@ -11,9 +11,9 @@ import 'package:pets_app/styles/text_styles.dart';
 
 class HomeController extends GetxController {
   final firestoreRepository = FirestoreRepository();
-  String selectedCategory = 'All';
-  var user = Preference.getUser();
-  var petsQuery;
+  String selectedCategory = 'All'; // Default category
+  var user = Preference.getUser(); // Current user
+  var petsQuery; // Query for fetching pets
 
   @override
   void onInit() {
@@ -21,7 +21,7 @@ class HomeController extends GetxController {
     // Fetch the user's address when the screen is loaded
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       getAddress();
-      updateQuery('All');
+      updateQuery('All'); // Fetch all pets by default
     });
   }
 
@@ -30,6 +30,7 @@ class HomeController extends GetxController {
     selectedCategory = category;
     petsQuery =
         FirebaseFirestore.instance.collection(FirebaseConstants.petsCollection);
+
     if (selectedCategory != 'All') {
       petsQuery = petsQuery?.where('category', isEqualTo: selectedCategory);
     }

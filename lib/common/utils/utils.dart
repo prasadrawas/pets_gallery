@@ -1,11 +1,33 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pets_app/constants/string_constants.dart';
 import 'package:pets_app/presentation/widgets/dialogs/loading_dialog.dart';
 import 'package:pets_app/styles/text_styles.dart';
 
 class Utils {
+  static bool doubleBackToExitPressedOnce = false;
+
+  static bool onBackPressed() {
+    if (doubleBackToExitPressedOnce) {
+      // This is the second back press within 2 seconds
+      return true; // Exit the app
+    }
+
+    // Show a toast message
+    Fluttertoast.showToast(msg: 'Press back to exit');
+
+    doubleBackToExitPressedOnce = true;
+
+    // Reset the flag after 2 seconds
+    Future.delayed(const Duration(seconds: 2), () {
+      doubleBackToExitPressedOnce = false;
+    });
+
+    return false;
+  }
+
   static void hideKeyboard(BuildContext context) {
     final currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) {

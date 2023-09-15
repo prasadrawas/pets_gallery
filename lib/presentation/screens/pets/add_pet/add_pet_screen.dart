@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pets_app/common/utils/utils.dart';
 import 'package:pets_app/common/utils/validator.dart';
 import 'package:pets_app/constants/app_constants.dart';
@@ -73,7 +74,7 @@ class _AddPetScreenState extends State<AddPetScreen> {
                   ),
                   const SizedBox(height: 20),
                   InkWell(
-                    onTap: _.showImagePickerBottomSheet,
+                    onTap: () => showImagePickerBottomSheet(_),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: Container(
@@ -212,5 +213,39 @@ class _AddPetScreenState extends State<AddPetScreen> {
   void _onDelete(AddPetController _) {
     Utils.hideKeyboard(context);
     _.deletePet(widget.pet?.id);
+  }
+
+  Future<void> showImagePickerBottomSheet(AddPetController _) async {
+    await Get.bottomSheet(
+      Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
+        ),
+        child: Wrap(
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Gallery'),
+              onTap: () async {
+                Get.back();
+                _.pickImageFrom(ImageSource.gallery);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.camera_alt),
+              title: const Text('Camera'),
+              onTap: () async {
+                Get.back();
+                _.pickImageFrom(ImageSource.camera);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

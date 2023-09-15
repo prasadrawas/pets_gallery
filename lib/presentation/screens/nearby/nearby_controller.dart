@@ -12,13 +12,21 @@ import 'package:pets_app/styles/text_styles.dart';
 class NearbyController extends GetxController {
   final firestoreRepository = FirestoreRepository();
   var user = Preference.getUser();
-
   Query<Map<String, dynamic>>? nearbyQuery;
 
   @override
   void onInit() {
     super.onInit();
+    // Fetch nearby pets and the user's address when the screen is loaded
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      fetchNearbyPets();
+      getAddress();
+    });
+  }
+
+  // Fetch nearby pets based on user's location
+  void fetchNearbyPets() {
+    if (user?.address != null) {
       nearbyQuery = FirebaseFirestore.instance
           .collection(FirebaseConstants.petsCollection)
           .where(
@@ -33,9 +41,9 @@ class NearbyController extends GetxController {
             FieldPath(const ['address', 'state']),
             isEqualTo: user?.address?.state,
           );
-      update();
-      getAddress();
-    });
+
+      update(); // Notify the UI to update
+    }
   }
 
   // Fetch the user's address

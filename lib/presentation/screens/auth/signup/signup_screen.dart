@@ -29,7 +29,7 @@ class _SignupScreenState extends State<SignupScreen> {
       init: SignupController(),
       builder: (_) {
         return WillPopScope(
-          onWillPop: () async => _.onBackPressed(),
+          onWillPop: () async => Utils.onBackPressed(),
           child: Scaffold(
             body: SafeArea(
               child: LayoutBuilder(

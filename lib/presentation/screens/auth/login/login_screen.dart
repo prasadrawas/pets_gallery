@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
       init: LoginController(),
       builder: (_) {
         return WillPopScope(
-          onWillPop: () async => _.onBackPressed(),
+          onWillPop: () async => Utils.onBackPressed(),
           child: Scaffold(
             body: SafeArea(
               child: LayoutBuilder(

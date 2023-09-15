@@ -24,6 +24,7 @@ class AddPetController extends GetxController {
   XFile? selectedImage;
   String? selectedCategory;
 
+  // Set pet details in the form fields for editing or creating a new pet
   void setPetDetails(Pet? pet) {
     if (pet != null) {
       selectedCategory = pet.category;
@@ -33,9 +34,10 @@ class AddPetController extends GetxController {
       colorController.text = pet.color;
       ageController.text = pet.age;
     } else {
+      // Initialize fields with default values if creating a new pet
       // selectedCategory = AppConstants.petCategories.first;
       // categoryController.text = selectedCategory ?? 'Dog';
-      // nameController.text = 'Max';f
+      // nameController.text = 'Max';
       // descriptionController.text =
       //     'Max is a friendly and energetic dog who loves to play fetch and go on long walks.';
       // colorController.text = 'Brown and White';
@@ -46,66 +48,29 @@ class AddPetController extends GetxController {
     update();
   }
 
-  Future<void> showImagePickerBottomSheet() async {
-    await Get.bottomSheet(
-      Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.circular(15),
-          ),
-        ),
-        child: Wrap(
-          children: <Widget>[
-            ListTile(
-              leading: const Icon(Icons.photo_library),
-              title: const Text('Gallery'),
-              onTap: () async {
-                Get.back();
-                final imagePicker = ImagePicker();
-                final image = await imagePicker.pickImage(
-                  source: ImageSource.gallery,
-                );
-                if (image != null) {
-                  selectedImage = XFile(image.path);
-                  update(); // Update the UI to display the selected image
-                }
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.camera_alt),
-              title: const Text('Camera'),
-              onTap: () async {
-                Get.back();
-                final imagePicker = ImagePicker();
-                final image = await imagePicker.pickImage(
-                  source: ImageSource.camera,
-                );
-                if (image != null) {
-                  selectedImage = XFile(image.path);
-                  update(); // Update the UI to display the selected image
-                }
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+  // Pick an image from the gallery or camera
+  void pickImageFrom(ImageSource source) async {
+    final imagePicker = ImagePicker();
+    final image = await imagePicker.pickImage(source: source);
+    if (image != null) {
+      selectedImage = XFile(image.path);
+      update(); // Update the UI to display the selected image
+    }
   }
 
+  // Save pet data to Firestore and handle image upload
   Future<void> savePet(Pet? pet) async {
     Utils.showLoading('Saving pet');
     String imageUrl =
         pet?.image ?? ''; // Use pet?.image if available, otherwise empty string
 
     if (selectedImage != null) {
+      // Handle image upload
       final storageResult =
           await storageRepository.uploadImage(File(selectedImage!.path));
       if (storageResult.isError) {
         Get.back();
         Utils.showErrorSnackBar('Upload Error', storageResult.error!);
-
         return;
       }
       if (imageUrl.isNotEmpty) {
@@ -115,10 +80,10 @@ class AddPetController extends GetxController {
     } else if (pet?.image == null) {
       Get.back();
       Utils.showErrorSnackBar('Image Error', 'Please select an image');
-
       return;
     }
 
+    // Get data from form fields
     final name = nameController.text.trim();
     final description = descriptionController.text.trim();
     final color = colorController.text.trim();
@@ -128,6 +93,7 @@ class AddPetController extends GetxController {
     final petCategory = categoryController.text.trim();
 
     try {
+      // Create a Pet object
       final petData = Pet(
         id: pet?.id,
         name: name,
@@ -142,6 +108,7 @@ class AddPetController extends GetxController {
         category: petCategory,
       );
 
+      // Save pet data to Firestore
       final petResult = await firestoreRepository.savePet(petData);
       Get.back();
       if (petResult.isError) {
@@ -156,6 +123,7 @@ class AddPetController extends GetxController {
     }
   }
 
+  // Delete a pet record from Firestore
   Future<void> deletePet(String? id) async {
     Utils.showLoading('Deleting record');
     firestoreRepository.deletePet(id).then((value) async {
@@ -172,6 +140,7 @@ class AddPetController extends GetxController {
 
   @override
   void onClose() {
+    // Dispose of controllers
     // nameController.dispose();
     // descriptionController.dispose();
     // colorController.dispose();

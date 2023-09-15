@@ -7,13 +7,22 @@ import 'package:pets_app/presentation/screens/auth/login/login_screen.dart';
 
 class ProfileController extends GetxController {
   final authRepository = FirebaseAuthRepository();
-  final user = Preference.getUser();
+  final user = Preference.getUser(); // Get the user from preferences
 
+  // Method to handle user logout
   void logout() async {
-    Utils.showLoading('Signing out');
+    Utils.showLoading('Signing out'); // Show a loading indicator
+
+    // Sign the user out
     await authRepository.signOut();
+
+    // Clear user preferences
     await Preference.clearPreferences();
+
+    // Delay for 1 second (optional) to show the loading indicator
     await Future.delayed(const Duration(seconds: 1));
+
+    // Navigate to the LoginScreen after logout
     Navigation.navigateOffAllRightToLeft(const LoginScreen());
   }
 }

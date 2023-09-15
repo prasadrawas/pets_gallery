@@ -8,13 +8,16 @@ import 'logger_service.dart';
 class LocationHandler {
   static final locationService = Location();
 
+  // Determine the current device's position
   static Future<LocationData> determinePosition() async {
     bool serviceEnabled;
     PermissionStatus permissionGranted;
 
     try {
+      // Check if location services are enabled
       serviceEnabled = await locationService.serviceEnabled();
       if (!serviceEnabled) {
+        // Request to enable location services if not enabled
         serviceEnabled = await locationService.requestService();
         if (!serviceEnabled) {
           LoggerService.w('Location service is disabled');
@@ -22,8 +25,10 @@ class LocationHandler {
         }
       }
 
+      // Check for location permissions
       permissionGranted = await locationService.hasPermission();
       if (permissionGranted == PermissionStatus.denied) {
+        // Request location permissions if not granted
         permissionGranted = await locationService.requestPermission();
         if (permissionGranted != PermissionStatus.granted) {
           LoggerService.w('Location permission is denied');
@@ -31,6 +36,7 @@ class LocationHandler {
         }
       }
 
+      // Retrieve the device's location
       return await locationService.getLocation();
     } catch (e) {
       LoggerService.e('Error determining position: $e');
@@ -38,6 +44,7 @@ class LocationHandler {
     }
   }
 
+  // Get the current address based on the device's location
   static Future<Result<AppAddress>> getCurrentAddress() async {
     try {
       final position = await determinePosition();
